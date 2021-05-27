@@ -22,6 +22,8 @@ const App = () => {
           headerTitleStyle: {
             color: Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
           },
+          headerTintColor:
+            Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
         }}>
         <Stack.Screen name="Categories" component={CategoriesScreen} />
         <Stack.Screen
@@ -29,6 +31,20 @@ const App = () => {
           component={CategoryMealScreen}
           options={({route}) => ({
             title: route.params.item.title,
+            headerStyle: {
+              backgroundColor:
+                Platform.OS === 'android' ? route.params.item.color : 'white',
+            },
+            headerTitleStyle: {
+              color:
+                Platform.OS === 'android'
+                  ? route.params.item.textColor
+                  : COLORS.primaryColor,
+            },
+            headerTintColor:
+              Platform.OS === 'android'
+                ? route.params.item.textColor
+                : COLORS.primaryColor,
           })}
         />
         <Stack.Screen name="Meal Detail" component={MealDetailScreen} />

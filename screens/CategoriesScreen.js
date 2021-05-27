@@ -1,6 +1,6 @@
 import React from 'react';
-import {FlatList, StyleSheet, Dimensions, View} from 'react-native';
-import {CATEGORIES} from '../data/15.1 dummy-data';
+import {FlatList, StyleSheet, View} from 'react-native';
+import {CATEGORIES} from '../data/dummy-data';
 import GridItem from '../components/GridItem';
 
 const CategoriesScreen = ({navigation}) => {
@@ -32,12 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-  },
-  item: {
-    width: Dimensions.get('window').width / 2 - 30,
-    height: 150,
-    margin: 15,
-    backgroundColor: 'grey',
   },
 });
 
