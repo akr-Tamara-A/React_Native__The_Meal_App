@@ -1,12 +1,14 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import {Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import CategoriesScreen from './screens/CategoriesScreen';
 import CategoryMealScreen from './screens/CategoryMealScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
 import COLORS from './constants/colors';
-import {Platform} from 'react-native';
+import StyledHeaderButton from './components/StyledHeaderButton';
 
 const Stack = createStackNavigator();
 
@@ -47,7 +49,49 @@ const App = () => {
                 : COLORS.primaryColor,
           })}
         />
-        <Stack.Screen name="Meal Detail" component={MealDetailScreen} />
+        <Stack.Screen
+          name="Meal Detail"
+          component={MealDetailScreen}
+          options={({route}) => ({
+            title: route.params.meal.title,
+            headerStyle: {
+              backgroundColor:
+                Platform.OS === 'android'
+                  ? route.params.category.color
+                  : 'white',
+            },
+            headerTitleStyle: {
+              color:
+                Platform.OS === 'android'
+                  ? route.params.category.textColor
+                  : COLORS.primaryColor,
+            },
+            headerTintColor:
+              Platform.OS === 'android'
+                ? route.params.category.textColor
+                : COLORS.primaryColor,
+            headerRight: () => {
+              return (
+                <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
+                  <Item
+                    title="Favorite"
+                    iconName="star"
+                    onPress={() => {
+                      console.log('fav');
+                    }}
+                  />
+                  <Item
+                    title="Unfavorite"
+                    iconName="star-outline"
+                    onPress={() => {
+                      console.log('unfav');
+                    }}
+                  />
+                </HeaderButtons>
+              );
+            },
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

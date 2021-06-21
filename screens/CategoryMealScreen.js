@@ -23,6 +23,7 @@ const CategoryMealScreen = ({navigation}) => {
               handlePress={() => {
                 navigation.navigate('Meal Detail', {
                   meal: item,
+                  category: route.params.item,
                 });
               }}
             />
