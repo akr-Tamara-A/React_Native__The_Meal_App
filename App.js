@@ -103,18 +103,13 @@ const HomeTab = () => {
           title: route.params.meal.title,
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? route.params.category.color : 'white',
+              Platform.OS === 'android' ? COLORS.primaryColor : 'white',
           },
           headerTitleStyle: {
-            color:
-              Platform.OS === 'android'
-                ? route.params.category.textColor
-                : COLORS.primaryColor,
+            color: Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
           },
           headerTintColor:
-            Platform.OS === 'android'
-              ? route.params.category.textColor
-              : COLORS.primaryColor,
+            Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
           headerRight: () => {
             return (
               <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
@@ -156,6 +151,42 @@ const FavTab = () => {
           Platform.OS === 'android' ? 'white' : COLORS.accentColor,
       }}>
       <FavStack.Screen name="Favorite Meals" component={FavoritesScreen} />
+      <FavStack.Screen
+        name="Meal Detail"
+        component={MealDetailScreen}
+        options={({route}) => ({
+          title: route.params.meal.title,
+          headerStyle: {
+            backgroundColor:
+              Platform.OS === 'android' ? COLORS.accentColor : 'white',
+          },
+          headerTitleStyle: {
+            color: Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
+          },
+          headerTintColor:
+            Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
+          headerRight: () => {
+            return (
+              <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
+                <Item
+                  title="Favorite"
+                  iconName="star"
+                  onPress={() => {
+                    console.log('fav');
+                  }}
+                />
+                <Item
+                  title="Unfavorite"
+                  iconName="star-outline"
+                  onPress={() => {
+                    console.log('unfav');
+                  }}
+                />
+              </HeaderButtons>
+            );
+          },
+        })}
+      />
     </FavStack.Navigator>
   );
 };
