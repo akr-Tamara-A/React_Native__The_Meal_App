@@ -1,11 +1,10 @@
 import React from 'react';
-import {Platform} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import COLORS from '../constants/colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import StyledHeaderButton from '../components/StyledHeaderButton';
+import {accentStyle} from '../styles/headerStyle';
 
 const FavStack = createStackNavigator();
 
@@ -13,15 +12,7 @@ const FavTab = () => {
   return (
     <FavStack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor:
-            Platform.OS === 'android' ? COLORS.accentColor : 'white',
-        },
-        headerTitleStyle: {
-          color: Platform.OS === 'android' ? 'white' : COLORS.accentColor,
-        },
-        headerTintColor:
-          Platform.OS === 'android' ? 'white' : COLORS.accentColor,
+        ...accentStyle,
       }}>
       <FavStack.Screen
         name="Favorite Meals"
@@ -34,7 +25,6 @@ const FavTab = () => {
                   title="Menu"
                   iconName="menu"
                   onPress={() => {
-                    console.log('menu');
                     navigation.toggleDrawer();
                   }}
                 />
@@ -48,15 +38,7 @@ const FavTab = () => {
         component={MealDetailScreen}
         options={({route}) => ({
           title: route.params.meal.title,
-          headerStyle: {
-            backgroundColor:
-              Platform.OS === 'android' ? COLORS.accentColor : 'white',
-          },
-          headerTitleStyle: {
-            color: Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
-          },
-          headerTintColor:
-            Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
+          ...accentStyle,
           headerRight: () => {
             return (
               <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>

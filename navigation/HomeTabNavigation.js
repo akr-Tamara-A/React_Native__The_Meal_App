@@ -7,6 +7,7 @@ import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealScreen from '../screens/CategoryMealScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import StyledHeaderButton from '../components/StyledHeaderButton';
+import {defaultStyle} from '../styles/headerStyle';
 
 const HomeStack = createStackNavigator();
 
@@ -14,15 +15,7 @@ const HomeTab = () => {
   return (
     <HomeStack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor:
-            Platform.OS === 'android' ? COLORS.primaryColor : 'white',
-        },
-        headerTitleStyle: {
-          color: Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
-        },
-        headerTintColor:
-          Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
+        ...defaultStyle,
       }}>
       <HomeStack.Screen
         name="Categories"
@@ -35,7 +28,6 @@ const HomeTab = () => {
                   title="Menu"
                   iconName="menu"
                   onPress={() => {
-                    console.log('menu');
                     navigation.toggleDrawer();
                   }}
                 />
@@ -70,15 +62,7 @@ const HomeTab = () => {
         component={MealDetailScreen}
         options={({route, navigation}) => ({
           title: route.params.meal.title,
-          headerStyle: {
-            backgroundColor:
-              Platform.OS === 'android' ? COLORS.primaryColor : 'white',
-          },
-          headerTitleStyle: {
-            color: Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
-          },
-          headerTintColor:
-            Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
+          ...defaultStyle,
           headerRight: () => {
             return (
               <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>

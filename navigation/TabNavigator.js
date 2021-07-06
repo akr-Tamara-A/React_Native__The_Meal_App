@@ -6,14 +6,21 @@ import COLORS from '../constants/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeTab from './HomeTabNavigation';
 import FavTab from './FavTabNavigation';
+import RegularText from '../components/RegularText';
 
 const tabNavigatorConfig =
   Platform.OS === 'android'
-    ? {shifting: true}
+    ? {
+        shifting: true,
+      }
     : {
         tabBarOptions: {
           activeTintColor: COLORS.accentColor,
-          labelStyle: {fontSize: 16},
+          labelStyle: {
+            fontSize: 18,
+            fontFamily: 'OpenSans-Bold',
+            fontWeight: 'bold',
+          },
         },
       };
 
@@ -33,6 +40,7 @@ const TabNavigator = () => {
             <Icon name="restaurant" size={25} color={color} />
           ),
           tabBarColor: COLORS.primaryColor,
+          tabBarLabel: <RegularText>Meals</RegularText>,
         }}
       />
       <Tab.Screen
@@ -41,6 +49,7 @@ const TabNavigator = () => {
         options={{
           tabBarIcon: ({color}) => <Icon name="star" size={25} color={color} />,
           tabBarColor: COLORS.accentColor,
+          tabBarLabel: <RegularText>Favorites</RegularText>,
         }}
       />
     </Tab.Navigator>

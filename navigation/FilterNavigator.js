@@ -1,10 +1,9 @@
 import React from 'react';
-import {Platform} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import COLORS from '../constants/colors';
 import FiltersScreen from '../screens/FiltersScreen';
 import StyledHeaderButton from '../components/StyledHeaderButton';
+import {defaultStyle} from '../styles/headerStyle';
 
 const FiltersStack = createStackNavigator();
 
@@ -15,15 +14,7 @@ const FiltersNavigator = () => {
         name="Filter Meals"
         component={FiltersScreen}
         options={({navigation}) => ({
-          headerStyle: {
-            backgroundColor:
-              Platform.OS === 'android' ? COLORS.primaryColor : 'white',
-          },
-          headerTitleStyle: {
-            color: Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
-          },
-          headerTintColor:
-            Platform.OS === 'android' ? 'white' : COLORS.primaryColor,
+          ...defaultStyle,
           headerLeft: () => {
             return (
               <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
