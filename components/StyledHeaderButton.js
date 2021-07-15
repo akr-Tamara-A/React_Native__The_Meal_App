@@ -10,7 +10,7 @@ const StyledHeaderButton = props => {
       {...props}
       IconComponent={Icon}
       color={Platform.OS === 'android' ? 'white' : COLORS.primaryColor}
-      size="23"
+      iconSize={23}
     />
   );
 };
