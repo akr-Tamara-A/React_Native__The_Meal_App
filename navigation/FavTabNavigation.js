@@ -39,26 +39,6 @@ const FavTab = () => {
         options={({route}) => ({
           title: route.params.meal.title,
           ...accentStyle,
-          headerRight: () => {
-            return (
-              <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
-                <Item
-                  title="Favorite"
-                  iconName="star"
-                  onPress={() => {
-                    console.log('fav');
-                  }}
-                />
-                <Item
-                  title="Unfavorite"
-                  iconName="star-outline"
-                  onPress={() => {
-                    console.log('unfav');
-                  }}
-                />
-              </HeaderButtons>
-            );
-          },
         })}
       />
     </FavStack.Navigator>

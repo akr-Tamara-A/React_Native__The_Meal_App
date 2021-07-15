@@ -60,22 +60,9 @@ const HomeTab = () => {
       <HomeStack.Screen
         name="Meal Detail"
         component={MealDetailScreen}
-        options={({route, navigation}) => ({
+        options={({route}) => ({
           title: route.params.meal.title,
           ...defaultStyle,
-          headerRight: () => {
-            return (
-              <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
-                <Item
-                  title="Favorite"
-                  iconName="star"
-                  onPress={() => {
-                    console.log('fav');
-                  }}
-                />
-              </HeaderButtons>
-            );
-          },
         })}
       />
     </HomeStack.Navigator>

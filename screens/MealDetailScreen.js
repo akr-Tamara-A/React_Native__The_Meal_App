@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View, Image, ScrollView} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import RegularText from '../components/RegularText';
 import BoldText from '../components/BoldText';
+import {useDispatch} from 'react-redux';
+import {toggleFavorite} from '../store/actions/meals';
+import {useSelector} from 'react-redux';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import StyledHeaderButton from '../components/StyledHeaderButton';
 
 const ListItem = ({children}) => {
   return (
@@ -12,9 +17,29 @@ const ListItem = ({children}) => {
   );
 };
 
-const MealDetailScreen = () => {
+const MealDetailScreen = ({navigation}) => {
   const route = useRoute();
   const meal = route.params.meal;
+  const dispath = useDispatch();
+  const favoriteMeals = useSelector(state => state.meals.favoriteMeals);
+
+  const isFav = favoriteMeals.some(favMeal => favMeal.id === meal.id);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
+            <Item
+              title="Favorite"
+              iconName={isFav ? 'star' : 'star-outline'}
+              onPress={() => dispath(toggleFavorite(meal.id))}
+            />
+          </HeaderButtons>
+        );
+      },
+    });
+  }, [dispath, isFav, meal.id, navigation]);
 
   return (
     <ScrollView style={styles.screen}>
