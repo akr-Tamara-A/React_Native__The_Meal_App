@@ -13,7 +13,7 @@ const FiltersNavigator = () => {
       <FiltersStack.Screen
         name="Filter Meals"
         component={FiltersScreen}
-        options={({navigation, route}) => ({
+        options={({navigation}) => ({
           ...defaultStyle,
           headerLeft: () => {
             return (
@@ -22,21 +22,7 @@ const FiltersNavigator = () => {
                   title="Menu"
                   iconName="menu"
                   onPress={() => {
-                    console.log('menu');
                     navigation.toggleDrawer();
-                  }}
-                />
-              </HeaderButtons>
-            );
-          },
-          headerRight: () => {
-            return (
-              <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
-                <Item
-                  title="Save"
-                  iconName="save"
-                  onPress={() => {
-                    console.log(route.params.save);
                   }}
                 />
               </HeaderButtons>

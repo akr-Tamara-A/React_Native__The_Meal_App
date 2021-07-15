@@ -4,6 +4,10 @@ import BoldText from '../components/BoldText';
 import RegularText from '../components/RegularText';
 import COLORS from '../constants/colors';
 import {Platform} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {setFilters} from '../store/actions/meals';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import StyledHeaderButton from '../components/StyledHeaderButton';
 
 const FiltersSwitch = ({label, value, onChange}) => {
   return (
@@ -32,17 +36,31 @@ const FiltersScreen = ({navigation}) => {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegatarian, setIsVegatarian] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
+  const dispath = useDispatch();
 
   useEffect(() => {
-    navigation.setParams({
-      save: {
-        glutenFree: isGlutenFree,
-        vegan: isVegan,
-        vegatarian: isVegatarian,
-        lactoseFree: isLactoseFree,
+    const filters = {
+      glutenFree: isGlutenFree,
+      vegan: isVegan,
+      vegatarian: isVegatarian,
+      lactoseFree: isLactoseFree,
+    };
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <HeaderButtons HeaderButtonComponent={StyledHeaderButton}>
+            <Item
+              title="Save"
+              iconName="save"
+              onPress={() => {
+                dispath(setFilters(filters));
+              }}
+            />
+          </HeaderButtons>
+        );
       },
     });
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegatarian, navigation]);
+  }, [dispath, isGlutenFree, isLactoseFree, isVegan, isVegatarian, navigation]);
 
   return (
     <View style={styles.screen}>
